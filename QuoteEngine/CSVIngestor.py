@@ -8,7 +8,7 @@ class CSVIngestor(IngestorInterface):
     allowed_extensions = ['csv']
 
     @classmethod
-    def parse(cls, path: str) -> List[QuoteModel]:
+    def parse(cls, path: str)-> List[QuoteModel]:
         if not cls.can_ingest(path):
             raise Exception('cannot ingest exception')
 
