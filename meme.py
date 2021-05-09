@@ -1,9 +1,12 @@
 import os
 import random
+import argparse
+
 
 # @TODO Import your Ingestor and MemeEngine classes
 from QuoteEngine import Ingestor
 from QuoteEngine import QuoteModel
+from MemeEngine import MemeEngine
 
 
 def generate_meme(path=None, body=None, author=None):
@@ -47,4 +50,16 @@ if __name__ == "__main__":
     # body - quote body to add to the image
     # author - quote author to add to the image
     args = None
+    parser = argparse.ArgumentParser(description='/pass img path,Quote ' + 'body, author')
+    parser.add_argument('--path', type=str, default=None,
+                        help='path of input image file')
+    parser.add_argument('--body', type=str, default=None,
+                        help='body of the quote')
+    parser.add_argument('--author', type=str, default=None,
+                        help='author of the quote')
+    try:
+        args = parser.parse_args()
+    except Exception:
+        print("command line param not parsed")
+
     print(generate_meme(args.path, args.body, args.author))
