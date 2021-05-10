@@ -26,8 +26,8 @@ def generate_meme(path=None, body=None, author=None):
 
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
-                       './_data/DogQuotes/DogQuotesDOCX.docx',
-                       './_data/DogQuotes/DogQuotesPDF.pdf',
+                       # './_data/DogQuotes/DogQuotesDOCX.docx',
+                       # './_data/DogQuotes/DogQuotesPDF.pdf',
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
@@ -39,8 +39,9 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeEngine('./tmp')
-    path = meme.make_meme(img, quote.body, quote.author)
+    meme = MemeEngine.MemeEngine('./tmp')
+    path = meme.make_meme(img_path=img, text=quote.body, author=quote.author, width=500)
+
     return path
 
 
@@ -59,7 +60,7 @@ if __name__ == "__main__":
                         help='author of the quote')
     try:
         args = parser.parse_args()
-    except Exception:
+    except:
         print("command line param not parsed")
 
     print(generate_meme(args.path, args.body, args.author))

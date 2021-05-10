@@ -1,6 +1,6 @@
 from abc import ABC, abstractclassmethod
 from typing import List
-from .QuoteModel import QuoteModel
+from QuoteModel import QuoteModel
 
 
 class IngestorInterface(ABC):

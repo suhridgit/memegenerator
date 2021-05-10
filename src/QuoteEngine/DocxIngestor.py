@@ -1,5 +1,5 @@
-from .IngestorInterface import IngestorInterface
-from .QuoteModel import QuoteModel
+from QuoteEngine.IngestorInterface import IngestorInterface
+from QuoteEngine.QuoteModel import QuoteModel
 import docx
 from typing import List
 

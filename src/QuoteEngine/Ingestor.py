@@ -1,11 +1,10 @@
 from typing import List
-from .QuoteModel import QuoteModel
-from .DocxIngestor import DocxIngestor
-from .CSVIngestor import CSVIngestor
-from .TXTIngestor import TXTIngestor
-from .PDFIngestor import PDFIngestor
-
-from .IngestorInterface import IngestorInterface
+from QuoteModel import QuoteModel
+from DocxIngestor import DocxIngestor
+from CSVIngestor import CSVIngestor
+from TXTIngestor import TXTIngestor
+from PDFIngestor import PDFIngestor
+from IngestorInterface import IngestorInterface
 
 
 class Ingestor(IngestorInterface):

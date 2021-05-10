@@ -2,10 +2,11 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 
 
-class MemeEngine:
+class MemeEngine(object):
     def __init__(self, out_path):
         self.out_path = out_path
 
+    @staticmethod
     def make_meme(self, img_path, text, author, width=500) -> str:
 
         img = Image.open(img_path)

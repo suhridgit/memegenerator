@@ -3,8 +3,8 @@ import subprocess
 import os
 import random
 
-from .IngestorInterface import IngestorInterface
-from .QuoteModel import QuoteModel
+from IngestorInterface import IngestorInterface
+from QuoteModel import QuoteModel
 
 
 class PDFIngestor(IngestorInterface):
@@ -18,7 +18,7 @@ class PDFIngestor(IngestorInterface):
 
         tmp = f'./tmp/{random.randint(0,1000000)}.txt'
 
-        # call = subprocess.call(['pdftotext', path, tmp])
+        call = subprocess.call(['pdftotext', path, tmp])
 
         file_ref = open(tmp, "r")
         quotes = []
@@ -33,3 +33,21 @@ class PDFIngestor(IngestorInterface):
         file_ref.close()
         os.remove(tmp)
         return quotes
+
+    # @classmethod
+    # def parse(cls, path):
+    #     if not cls.can_ingest(path):
+    #         raise Exception('Cannot Ingest Exception')
+    #
+    #     quotes = []
+    #     cmd = ["pdftotext", path]
+    #     process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    #     output, _ = process.communicate()
+    #     output = output.splitlines()
+    #
+    #     for item in output:
+    #         quote, author = item.split('-')
+    #         a_quote = QuoteModel(quote, author)
+    #         quotes.append(a_quote)
+    #
+    #     return quotes
