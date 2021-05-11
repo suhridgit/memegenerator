@@ -23,7 +23,7 @@ def generate_meme(path=None, body=None, author=None):
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
                        './_data/DogQuotes/DogQuotesDOCX.docx',
-                       # './_data/DogQuotes/DogQuotesPDF.pdf',
+                       './_data/DogQuotes/DogQuotesPDF.pdf',
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
         for f in quote_files:
@@ -33,7 +33,7 @@ def generate_meme(path=None, body=None, author=None):
     else:
         if author is None:
             raise Exception('Author Required if Body is Used')
-        quote = QuoteModel.QuoteModel(body, author)
+        quote = QuoteModel(body, author)
 
     meme = MemeEngine('./tmp')
     path = meme.make_meme(img_path=img, text=quote.body, author=quote.author, width=500)
@@ -42,10 +42,6 @@ def generate_meme(path=None, body=None, author=None):
 
 
 if __name__ == "__main__":
-    # @TODO Use ArgumentParser to parse the following CLI arguments
-    # path - path to an image file
-    # body - quote body to add to the image
-    # author - quote author to add to the image
     args = None
     parser = argparse.ArgumentParser(description='/pass img path,Quote ' + 'body, author')
     parser.add_argument('--path', type=str, default=None,
