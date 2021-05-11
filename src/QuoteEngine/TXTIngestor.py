@@ -5,6 +5,8 @@ from typing import List
 
 class TXTIngestor(IngestorInterface):
 
+    allowed_extensions = ['txt']
+
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
         if not cls.can_ingest(path):
@@ -18,7 +20,7 @@ class TXTIngestor(IngestorInterface):
 
             if len(line) > 0:
 
-                parse = line.split(' - ')
+                parse = line.split('-')
                 new_quote = QuoteModel(parse[0], parse[1])
                 quotes.append(new_quote)
 
