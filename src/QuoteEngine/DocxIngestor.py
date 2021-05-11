@@ -1,5 +1,5 @@
-from QuoteEngine.IngestorInterface import IngestorInterface
-from QuoteEngine.QuoteModel import QuoteModel
+from .IngestorInterface import IngestorInterface
+from .QuoteModel import QuoteModel
 import docx
 from typing import List
 
@@ -16,8 +16,8 @@ class DocxIngestor(IngestorInterface):
         doc = docx.Document(path)
         for para in doc.paragraphs:
             if para.text != "":
-                parse = para.text.split(',')
-                new_quotes = QuoteModel(parse[0], parse[1])
-                quotes.append(new_quotes)
+                parsed = para.text.split(' - ')
+                new_quote = QuoteModel(parsed[0], parsed[1])
+                quotes.append(new_quote)
 
-                return quotes
+        return quotes

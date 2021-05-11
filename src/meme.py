@@ -24,7 +24,7 @@ def generate_meme(path=None, body=None, author=None):
 
     if body is None:
         quote_files = ['./_data/DogQuotes/DogQuotesTXT.txt',
-                       # './_data/DogQuotes/DogQuotesDOCX.docx',
+                       './_data/DogQuotes/DogQuotesDOCX.docx',
                        # './_data/DogQuotes/DogQuotesPDF.pdf',
                        './_data/DogQuotes/DogQuotesCSV.csv']
         quotes = []
@@ -37,7 +37,7 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeEngine.MemeEngine('./tmp')
+    meme = MemeEngine('./tmp')
     path = meme.make_meme(img_path=img, text=quote.body, author=quote.author, width=500)
 
     return path

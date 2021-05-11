@@ -35,6 +35,3 @@ class MemeEngine(object):
             print(ValueError)
 
         return filepath
-
-
-
