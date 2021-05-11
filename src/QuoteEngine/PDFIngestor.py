@@ -1,6 +1,6 @@
 from typing import List
 import subprocess
-
+import os
 
 from .IngestorInterface import IngestorInterface
 from .QuoteModel import QuoteModel
@@ -15,7 +15,7 @@ class PDFIngestor(IngestorInterface):
             raise Exception('Cannot Ingest Exception')
 
         quotes = []
-        cmd = ["/Users/suhriddeshmukh/Downloads/xpdf-tools-mac-4.03/bin64/pdftotext", path]
+        cmd = ["./xpdf-tools-mac-4.03/bin64/pdftotext", path]
 
         process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         output, _ = process.communicate()
