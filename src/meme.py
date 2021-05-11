@@ -11,8 +11,6 @@ from MemeEngine import MemeEngine
 
 def generate_meme(path=None, body=None, author=None):
     """ Generate a meme given an path and a quote """
-    img = None
-    quote = None
 
     if path is None:
         images = "./_data/photos/dog/"

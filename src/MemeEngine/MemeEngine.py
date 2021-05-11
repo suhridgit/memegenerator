@@ -6,7 +6,6 @@ class MemeEngine(object):
     def __init__(self, out_path):
         self.out_path = out_path
 
-    @staticmethod
     def make_meme(self, img_path, text, author, width=500) -> str:
 
         img = Image.open(img_path)
@@ -22,9 +21,14 @@ class MemeEngine(object):
             font = ImageFont.truetype('./fonts/LilitaOne-Regular.ttf', size=20)
             draw.text((10, 30), message, font=font, fill='white')
 
-        outputfile = f'/{random.randint(0,100000000)}.jpg'
-        filepath = self.out_path + outputfile
+        from pathlib import Path
+        import os
 
+        current = Path('.').resolve()
+
+        outputfile = f'./{random.randint(0,100000000)}.jpg'
+        filepath = current / self.out_path / outputfile
+        os.chdir(current/self.out_path)
         try:
             img.save(filepath)
         except ValueError:
