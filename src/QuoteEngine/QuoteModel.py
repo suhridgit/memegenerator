@@ -4,7 +4,7 @@ quotes as body - author
 """
 
 
-class QuoteModel():
+class QuoteModel:
 
     def __init__(self, body, author):
         self.body = body
