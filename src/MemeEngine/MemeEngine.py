@@ -8,7 +8,7 @@ class MemeEngine(object):
         self.out_path = out_path
 
     def make_meme(self, img_path, text, author, width=500) -> str:
-        print(img_path)
+
         img = Image.open(img_path)
 
         if width is not None:
@@ -28,7 +28,7 @@ class MemeEngine(object):
 
         outputfile = f'./{random.randint(0,100000000)}.jpg'
         filepath = current / self.out_path / outputfile
-        
+
         try:
             img.save(filepath)
         except ValueError:

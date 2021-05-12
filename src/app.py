@@ -9,7 +9,7 @@ from QuoteEngine import Ingestor
 
 app = Flask(__name__)
 
-meme = MemeEngine('./static')
+meme = MemeEngine('./tmp')
 
 
 def setup():
@@ -43,7 +43,6 @@ def meme_rand():
     quote = random.choice(quotes)
 
     path = meme.make_meme(img_path=img, text=quote.body,author=quote.author)
-    print("THe path is\n", path)
     return render_template('meme.html', path=path)
 
 
@@ -57,19 +56,6 @@ def meme_form():
 def meme_post():
     """ Create a user defined meme """
 
-    # image_url = request.form['image_url']
-    # body = request.form['body']
-    # author = request.form['author']
-    # r = requests.get(image_url, allow_redirects=True)
-    # tmp = f'./tmp/{random.randint(0, 100000000)}.png'
-    # open(tmp, 'wb').write(r.content)
-    #
-    # outputImgPath = meme.make_meme(tmp, body, author)
-    # os.remove(tmp)
-    #
-    # return render_template('meme.html', path=outputImgPath)
-
-    from flask import request
     url = request.form['image_url']
     body = request.form['body']
     author = request.form['author']
@@ -81,6 +67,7 @@ def meme_post():
     os.unlink('created.jpg')
 
     return render_template('meme.html', path=path)
+
 
 if __name__ == "__main__":
     app.run()
