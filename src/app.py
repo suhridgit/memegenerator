@@ -1,7 +1,7 @@
 import random
 import os
 import requests
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, request
 
 
 from MemeEngine import MemeEngine
@@ -9,7 +9,7 @@ from QuoteEngine import Ingestor
 
 app = Flask(__name__)
 
-meme = MemeEngine('./tmp')
+meme = MemeEngine('./static')
 
 
 def setup():
@@ -43,6 +43,7 @@ def meme_rand():
     quote = random.choice(quotes)
 
     path = meme.make_meme(img_path=img, text=quote.body,author=quote.author)
+    print(path)
     return render_template('meme.html', path=path)
 
 
@@ -54,17 +55,29 @@ def meme_form():
 
 @app.route('/create', methods=['POST'])
 def meme_post():
-    """ Create a user defined meme """
+    """Create a user defined meme."""
 
-    url = request.form['image_url']
+    img = request.form['image_url']
     body = request.form['body']
     author = request.form['author']
 
-    r = requests.get(url, allow_redirects=True)
+    r = requests.get(img, allow_redirects=True)
+    tmp_img = './static/tmp_img.png'
+    with open(tmp_img, 'wb') as f:
+        f.write(r.content)
 
-    open('created.jpg', 'wb').write(r.content)
-    path = meme.make_meme('created.jpg', body, author)
-    os.unlink('created.jpg')
+    tmp_txt = './static/tmp_txt.txt'
+    with open(tmp_txt, 'w') as f:
+        f.write(f'{body} - {author}')
+
+    quote = Ingestor.parse(tmp_txt)[0]
+    body = quote.body
+    author = quote.author
+
+    path = meme.make_meme(tmp_img, body, author)
+
+    os.remove(tmp_img)
+    os.remove(tmp_txt)
 
     return render_template('meme.html', path=path)
 

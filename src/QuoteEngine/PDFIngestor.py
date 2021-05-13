@@ -24,6 +24,7 @@ class PDFIngestor(IngestorInterface):
         tmp = f'./{random.randint(0,100000000)}.txt'
 
         subprocess.call(["./xpdf-tools-mac-4.03/bin64/pdftotext", path, tmp])
+        # subprocess.call(["pdftotext", path, tmp])
 
         file_ref = open(tmp, "r")
         quotes = []
