@@ -1,5 +1,3 @@
-This project is a result of Udacity's Intermediate Python Nanodegree program.
-
 How to run the project:
 
 In the main directory, install the dependencies by running
